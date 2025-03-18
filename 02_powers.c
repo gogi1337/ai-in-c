@@ -12,7 +12,7 @@
  */
 float predict(float x, float weights[MAX_DEGREE], int degree) {
     float result = weights[0];  // Constant term
-    for (int j = 1; j < degree; j++) {
+    for (size_t j = 1; j < degree; j++) {
         result += weights[j] * pow(x, j);
     }
     return result;
@@ -30,7 +30,7 @@ void model_power_function(int power) {
     printf("MODELING FUNCTION: f(x) = x^%d\n", power);
     printf("=======================================\n");
     
-    for (int i = 0; i < num_samples; i++) {
+    for (size_t i = 0; i < num_samples; i++) {
         data[i][0] = (float)i;         // x value
         data[i][1] = pow(i, power);    // y = x^power
     }
@@ -46,7 +46,7 @@ void model_power_function(int power) {
     printf("---------------------------------------------\n");
     
     // On training data
-    for (int i = 0; i < num_samples; i++) {
+    for (size_t i = 0; i < num_samples; i++) {
         float x = data[i][0];
         float actual = data[i][1];
         float predicted = predict(x, weights, degree);
@@ -60,7 +60,7 @@ void model_power_function(int power) {
     printf("x\t| y=x^%d\t\t| Predicted\t| Error\n", power);
     printf("---------------------------------------------\n");
     
-    for (int i = 0; i < sizeof(test_x) / sizeof(test_x[0]); i++) {
+    for (size_t i = 0; i < sizeof(test_x) / sizeof(test_x[0]); i++) {
         float x = test_x[i];
         float actual = pow(x, power);
         float predicted = predict(x, weights, degree);
@@ -70,7 +70,7 @@ void model_power_function(int power) {
     printf("\nFunction: f(x) = ");
     int printed_term = 0;
     
-    for (int i = 0; i < degree; i++) {
+    for (size_t i = 0; i < degree; i++) {
         if (weights[i] != 0) {
             if (printed_term > 0) {
                 printf(" + ");
@@ -93,7 +93,7 @@ void model_power_function(int power) {
 int main() {
     int powers[] = {2, 3, 4};
     
-    for (int i = 0; i < 3; i++) {
+    for (size_t i = 0; i < 3; i++) {
         model_power_function(powers[i]);
     }
     
@@ -104,7 +104,7 @@ int main() {
     // float test_values[] = {2.5, 4.2, 6.0};
     float test_values[] = {2.1, 4.9, 4.1, 5.9};
     
-    for (int i = 0; i < sizeof(test_values) / sizeof(test_values[0]); i++) {
+    for (size_t i = 0; i < sizeof(test_values) / sizeof(test_values[0]); i++) {
         float x = test_values[i];
         printf("For x = %.1f:\n", x);
         
